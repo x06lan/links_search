@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import "./component/three_block"
+// import "./component/three_block"
 
 ReactDOM.render(
     <App />
