@@ -6,60 +6,18 @@ import './Link_tabs.css';
 
 class Link_block extends React.Component{
   render(){
-    function search_icon(url,search_id){
-      // console.log(url);
-      let url_name = url.split("/")[2]
-      let url_list = "https://favicongrabber.com/api/grab/" + url_name
-      let xhr = new XMLHttpRequest()
-      xhr.open('GET', url_list);
-      xhr.onload = function() {
-        let data = JSON.parse(this.responseText)["icons"]
-        let max = 0
-        let icon_src = ""
-        console.log(data);
-        for (let index = 0; index < data.length; index++) {
-          const element = data[index];
-          const width=parseInt(element.sizes.split("x"),10)
-          if( width>100){
-            icon_src= element.src
-            break
-          } 
-          if (width> max) {
-            icon_src= element.src
-          }
-          if (index == data.length - 1 && icon_src == "") {
-            icon_src= element.src
-          }
-        }
-        console.log(icon_src);
-        document.getElementById(search_id).src = icon_src
-      }
-      xhr.send()
+    if(this.props.data.icon==null){
+      this.props.data.icon="https://cdn-icons-png.flaticon.com/512/16/16686.png"
     }
-    // console.log(this.props.data.herf);
-    if (this.props.data.icon==null) {
-      let search_id=new Date().getTime()%10000
-      search_icon(this.props.data.herf,search_id)
-      return(
-        <a href={this.props.data.herf} className='link_block'>
-          <img id={search_id} src={this.props.data.icon} className='link_image'/>
-          <h4 className='link_title'>
-            {this.props.data.name}
-          </h4>
-        </a>
-
-      )
-    }
-    else{
     return(
-        <a href={this.props.data.herf} className='link_block'>
+        <a href={this.props.data.herf} className='link_block' target="_blank"  rel="noopener noreferrer">
           <img  src={this.props.data.icon} className='link_image'/>
           <h4 className='link_title'>
+            {this.props.data.id}
             {this.props.data.name}
           </h4>
         </a>
       )
-    }
   }
 }
 class Link_list extends React.Component{
@@ -67,17 +25,14 @@ class Link_list extends React.Component{
   render(){
     let links=[]
     links=this.props.cat.indata.map((item,index)=>{
-      return this.props.data[item]
+      let tem=this.props.data[item]
+      tem.id=item
+      return tem
     })
-    console.log(this.props.cat.name);
-    console.log(links);
-    
     return(
       <div className='container'>
         {
           links.map((item,index)=>{
-            // console.log(item);
-            // return <h3> {index}</h3>
             return <Link_block  key={index} data={item}></Link_block>
           })
         }
@@ -87,8 +42,6 @@ class Link_list extends React.Component{
 }
 class Link_tabs extends React.Component{
   render(){
-    // console.log(this.props.cat)
-    // console.log(this.props.data)
       let data=this.props.data
       let cat=this.props.cat
       return (
@@ -96,7 +49,6 @@ class Link_tabs extends React.Component{
           <Tabs>
             <TabList>
               {cat.map(function(item,index){
-                  // console.log(item.name,index)
                   return <Tab key={index}>{item.name}</Tab>
               })}
               <Tab>Title 2</Tab>
