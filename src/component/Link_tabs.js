@@ -1,3 +1,4 @@
+// import { time } from 'eslint/lib/util/timing';
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
@@ -5,16 +6,60 @@ import './Link_tabs.css';
 
 class Link_block extends React.Component{
   render(){
+    function search_icon(url,search_id){
+      // console.log(url);
+      let url_name = url.split("/")[2]
+      let url_list = "https://favicongrabber.com/api/grab/" + url_name
+      let xhr = new XMLHttpRequest()
+      xhr.open('GET', url_list);
+      xhr.onload = function() {
+        let data = JSON.parse(this.responseText)["icons"]
+        let max = 0
+        let icon_src = ""
+        console.log(data);
+        for (let index = 0; index < data.length; index++) {
+          const element = data[index];
+          const width=parseInt(element.sizes.split("x"),10)
+          if( width>100){
+            icon_src= element.src
+            break
+          } 
+          if (width> max) {
+            icon_src= element.src
+          }
+          if (index == data.length - 1 && icon_src == "") {
+            icon_src= element.src
+          }
+        }
+        console.log(icon_src);
+        document.getElementById(search_id).src = icon_src
+      }
+      xhr.send()
+    }
     // console.log(this.props.data.herf);
-    return(
-      <a href={this.props.data.herf} className='link_block'>
-		    <img src={this.props.data.icon} className='link_image'/>
-        <h4 className='link_title'>
-          {this.props.data.name}
-        </h4>
-      </a>
+    if (this.props.data.icon==null) {
+      let search_id=new Date().getTime()%10000
+      search_icon(this.props.data.herf,search_id)
+      return(
+        <a href={this.props.data.herf} className='link_block'>
+          <img id={search_id} src={this.props.data.icon} className='link_image'/>
+          <h4 className='link_title'>
+            {this.props.data.name}
+          </h4>
+        </a>
 
-    )
+      )
+    }
+    else{
+    return(
+        <a href={this.props.data.herf} className='link_block'>
+          <img  src={this.props.data.icon} className='link_image'/>
+          <h4 className='link_title'>
+            {this.props.data.name}
+          </h4>
+        </a>
+      )
+    }
   }
 }
 class Link_list extends React.Component{
