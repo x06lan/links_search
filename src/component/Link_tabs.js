@@ -13,7 +13,7 @@ class Link_block extends React.Component{
         <a href={this.props.data.href} className='link_block' target="_blank"  rel="noopener noreferrer">
           <img  src={this.props.data.icon} className='link_image'/>
           <h3 className='link_title'>
-            {this.props.data.id}
+            {/* {this.props.data.id} */}
             {this.props.data.name}
           </h3>
         </a>
