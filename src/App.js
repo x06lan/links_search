@@ -1,7 +1,5 @@
-// import Image_block_list from "./component/Image_block.js"
-// import Icon_block_list from "./component/Icon_block.js"
-// import Headeff from "./component/headline.js"
 import Link_tabs from "./component/Link_tabs";
+import Input_search from "./component/Input_search";
 import React from "react";
 import "./App.css";
 import * as data from"./data.json"
@@ -21,7 +19,9 @@ import * as cat from"./category.json"
 //       },
 //       {
 //         "name": "臺灣大學-IBM量子電腦中心",
-//         "herf": "http://quantum.ntu.edu.tw/#about",
+//         "herf": "htt// import Image_block_list from "./component/Image_block.js"
+// import Icon_block_list from "./component/Icon_block.js"
+// import Headeff from "./component/headline.js"p://quantum.ntu.edu.tw/#about",
 //         "icon": null,
 //         "add_time": "1576584969"
 //       },
@@ -38,6 +38,7 @@ class App extends React.Component {
   return (
     <div>
       <div className="header">
+        <Input_search data={data.data}></Input_search>
       </div>
       <div className="content">
         <Link_tabs key={0} data={data.data} cat={cat.cat}></Link_tabs>
