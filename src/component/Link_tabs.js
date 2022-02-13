@@ -12,10 +12,10 @@ class Link_block extends React.Component{
     return(
         <a href={this.props.data.herf} className='link_block' target="_blank"  rel="noopener noreferrer">
           <img  src={this.props.data.icon} className='link_image'/>
-          <h4 className='link_title'>
+          <h3 className='link_title'>
             {this.props.data.id}
             {this.props.data.name}
-          </h4>
+          </h3>
         </a>
       )
   }
@@ -49,9 +49,13 @@ class Link_tabs extends React.Component{
           <Tabs>
             <TabList>
               {cat.map(function(item,index){
-                  return <Tab key={index}>{item.name}</Tab>
+                  return <Tab key={index}>
+                    <h2>
+                    {item.name}
+                    </h2>
+                    </Tab>
               })}
-              <Tab>Title 2</Tab>
+              {/* <Tab>Title 2</Tab> */}
             </TabList>
 
               {cat.map(function(item,index){
@@ -59,9 +63,9 @@ class Link_tabs extends React.Component{
                     <Link_list key={index} data={data} cat={item}></Link_list>
                   </TabPanel>
               })}
-            <TabPanel>
+            {/* <TabPanel>
               <h2>Any content 2</h2>
-            </TabPanel>
+            </TabPanel> */}
           </Tabs>
         </div>
     )
