@@ -10,7 +10,7 @@ class Link_block extends React.Component{
       this.props.data.icon="https://cdn-icons-png.flaticon.com/512/16/16686.png"
     }
     return(
-        <a href={this.props.data.herf} className='link_block' target="_blank"  rel="noopener noreferrer">
+        <a href={this.props.data.href} className='link_block' target="_blank"  rel="noopener noreferrer">
           <img  src={this.props.data.icon} className='link_image'/>
           <h3 className='link_title'>
             {this.props.data.id}
